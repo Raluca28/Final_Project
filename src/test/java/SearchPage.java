@@ -14,6 +14,9 @@ public class SearchPage extends PageObject {
     @FindBy(xpath = "//*[@id='auxiliary']/div/div/ul[2]/li[1]/a")
     private WebElement geniusButton;
 
+    @FindBy(xpath = "//*[@id=\"main-container\"]/div[2]/div")
+    private WebElement mottoHeader;
+
     @FindBy(xpath = "//*[@id=\"masthead\"]/div/div/div[1]/a/img")
     private WebElement emagButton;
 
@@ -36,6 +39,11 @@ public class SearchPage extends PageObject {
     public void geniusButton() {
         Utils.WaitForElement(3);
         this.geniusButton.click();
+    }
+
+    public String getMottoHeader() {
+        Utils.WaitForElement(3);
+        return this.mottoHeader.getText();
     }
 
     public void emagButton() {

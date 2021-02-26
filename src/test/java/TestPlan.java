@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -32,33 +33,16 @@ public class TestPlan {
 
     }
 
-
     @BeforeSuite
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", Utils.CHROME_DRIVER_LOCATION);
     }
 
-    @Test(testName = "Click on a genius")
-    public static void testClickOnGenius() {
-        driver.get(Utils.BASE_URL);
-        SearchPage webForm = new SearchPage(driver);
-        webForm.geniusButton();
-    }
-
-    @Test(testName = "Click on a emag")
-    public static void testClickOnEmag() {
-        driver.get(Utils.BASE_URL);
-        SearchPage webForm = new SearchPage(driver);
-        webForm.geniusButton();
-        webForm.emagButton();
-    }
 
     @Test(testName = "Search a product")
     public static void searchForProduct() {
         driver.get(Utils.BASE_URL);
         SearchPage webForm = new SearchPage(driver);
-        webForm.geniusButton();
-        webForm.emagButton();
         webForm.populateSearchField();
         webForm.searchItemUsingButton();
     }
@@ -128,6 +112,22 @@ public class TestPlan {
         fifthPage.clickOnStore();
     }
 
+    @Test(testName = "Click on a genius")
+    public static void testClickOnGenius() {
+        driver.get(Utils.BASE_URL);
+        SearchPage webForm = new SearchPage(driver);
+        webForm.geniusButton();
+        Assert.assertEquals(webForm.getMottoHeader(), "un serviciu premium eMAG");
+    }
+
+    @Test(testName = "Click on a emag")
+    public static void testClickOnEmag() {
+        driver.get(Utils.BASE_URL);
+        SearchPage webForm = new SearchPage(driver);
+        webForm.geniusButton();
+        webForm.emagButton();
+    }
+
     @AfterSuite
     public static void cleanUp() {
         driver.manage().deleteAllCookies();
@@ -136,3 +136,4 @@ public class TestPlan {
 
 
 }
+
